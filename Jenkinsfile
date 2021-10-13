@@ -17,7 +17,20 @@ pipeline {
         stage('SonarAnalysis') {
             steps {
                 echo 'Analysis On Bugs....'
-		sh 'mvn sonar:sonar -Dsonar.host.url=http://54.177.165.242:9000 -Dsonar.login=c3dce2368b46ba6c41a9a733dfd3849587650aaf'
+		sh 'mvn sonar:sonar -Dsonar.host.url=http://65.1.130.30:9000 -Dsonar.login=a1198acb9c05e0e5761a3ff53f6f4c74a431635f'
+            }
+        }
+	stage('publish') {
+            steps {
+                echo 'publising....'
+		sh 'mvn deploy'
+            }
+        }
+	stage('Deploying') {
+            steps {
+                echo 'Deploying to tomcat....'
+		sh 'wget --user admin --password admin123 http://65.1.130.30:8081/nexus/service/local/repositories/releases/content/com/web/cal/WebAppCal/1.2.8/WebAppCal-1.2.8.war'
+		sh 'sudo cp *.war /opt/apache-tomcat-7.0.94/webapps'    
             }
         }
     }
