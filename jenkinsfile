@@ -5,10 +5,5 @@ node{
     stage('Compile package'){
       sh  'mvn package'
     }
-    stage('Email Notification'){
-    mail bcc: '', body: '''Hi ,
-    Welcome to jenkins
-    ''', cc: '', from: '', replyTo: '', subject: 'Job details', to: 'Devreddy2695@gmail.com'
-    
-    }
+   
 }    
