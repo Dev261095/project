@@ -1,25 +1,16 @@
-pipeline{
-  agent any
+node{
   environment {
   DOCKER_TAG = getVersion()
 }
- stage{
   stage('SCM checkout'){
-    steps{
     git 'https://github.com/ravi2krishna/JavaCalculator.git'
-         }
       }
     stage('Compile package'){
-     steps{
-     sh  'mvn clean package'
-          }
+      sh 'mvn clean package'
       }     
     stage('Docker image'){
-      steps{
       sh  'docker build -t devendhar10/JavaCal:0.1'
-           }
       }
-   }
 }   
  def getVersion(){
      def commitHash = sh label: '', returnStdout: true, script: 'git rev-parse --short HEAD'
