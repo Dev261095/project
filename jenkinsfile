@@ -9,7 +9,7 @@ node{
       sh 'mvn clean package'
       }     
     stage('Docker image'){
-      sh  'docker build . -t devendhar10/javacal'
+      sh  'docker build -t devendhar10/javacal1 .'
       }
 }   
  def getVersion(){
